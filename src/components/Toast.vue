@@ -6,10 +6,10 @@
 
 <script>
 export default {
-  props: ["text"],
+  props: ['text'],
   data() {
     return {
-      isShow: false
+      isShow: false,
     };
   },
   methods: {
@@ -18,8 +18,8 @@ export default {
       setTimeout(() => {
         this.isShow = false;
       }, 2000);
-    }
-  }
+    },
+  },
 };
 </script>
 

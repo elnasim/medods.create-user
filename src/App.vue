@@ -204,42 +204,42 @@
 </template>
 
 <script>
-import { required } from "vuelidate/lib/validators";
-import Toast from "@/components/Toast";
+import { required } from 'vuelidate/lib/validators';
+import Toast from '@/components/Toast.vue';
 
 export default {
-  name: "App",
+  name: 'App',
   components: { Toast },
   data() {
     return {
       initData: {
-        gender: ["Мужской", "Женский"],
-        clientGroup: ["VIP", "Проблемные", "ОМС"],
-        doctor: ["Иванов", "Захаров", "Чернышева"],
-        documentType: ["Паспорт", "Свидетельство о рождении", "Вод. удостоверение"]
+        gender: ['Мужской', 'Женский'],
+        clientGroup: ['VIP', 'Проблемные', 'ОМС'],
+        doctor: ['Иванов', 'Захаров', 'Чернышева'],
+        documentType: ['Паспорт', 'Свидетельство о рождении', 'Вод. удостоверение'],
       },
       formData: {
-        surname: "",
-        name: "",
-        patronymic: "",
-        dateOfBirth: "",
-        phone: "",
-        gender: "",
+        surname: '',
+        name: '',
+        patronymic: '',
+        dateOfBirth: '',
+        phone: '',
+        gender: '',
         clientGroup: [],
-        doctor: "",
+        doctor: '',
         isSendSMS: false,
-        postcode: "",
-        country: "",
-        region: "",
-        city: "",
-        street: "",
-        house: "",
-        documentType: "",
-        series: "",
-        number: "",
-        issuedBy: "",
-        dateOfIssue: ""
-      }
+        postcode: '',
+        country: '',
+        region: '',
+        city: '',
+        street: '',
+        house: '',
+        documentType: '',
+        series: '',
+        number: '',
+        issuedBy: '',
+        dateOfIssue: '',
+      },
     };
   },
   validations: {
@@ -251,8 +251,8 @@ export default {
       clientGroup: { required },
       city: { required },
       documentType: { required },
-      dateOfIssue: { required }
-    }
+      dateOfIssue: { required },
+    },
   },
   methods: {
     submitHandler() {
@@ -260,35 +260,35 @@ export default {
       if (!this.$v.$invalid) {
         this.$refs.toast.showHandler();
 
-        console.log("-->", this.formData);
+        console.log('-->', this.formData);
 
         this.formData = {
-          surname: "",
-          name: "",
-          patronymic: "",
-          dateOfBirth: "",
-          phone: "",
-          gender: "",
+          surname: '',
+          name: '',
+          patronymic: '',
+          dateOfBirth: '',
+          phone: '',
+          gender: '',
           clientGroup: [],
-          doctor: "",
+          doctor: '',
           isSendSMS: false,
-          postcode: "",
-          country: "",
-          region: "",
-          city: "",
-          street: "",
-          house: "",
-          documentType: "",
-          series: "",
-          number: "",
-          issuedBy: "",
-          dateOfIssue: ""
+          postcode: '',
+          country: '',
+          region: '',
+          city: '',
+          street: '',
+          house: '',
+          documentType: '',
+          series: '',
+          number: '',
+          issuedBy: '',
+          dateOfIssue: '',
         };
 
         this.$v.$reset();
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
