@@ -44,15 +44,32 @@
             <span class="input-error" v-if="$v.formData.dateOfBirth.$error">Поле обязательно</span>
           </label>
 
-          <label class="label">
-            <input
-              type="text"
-              class="input-text"
-              placeholder="Номер телефона*"
-              v-model.trim="$v.formData.phone.$model"
-            />
-            <span class="input-error" v-if="$v.formData.phone.$error">Поле обязательно</span>
-          </label>
+          <div class="form-group">
+            <label class="label">
+              <input
+                type="text"
+                class="input-text"
+                placeholder="Номер телефона*"
+                v-model.trim="formData.phone"
+                @input="$v.formData.phone.$touch()"
+              />
+              <div v-if="$v.formData.phone.$error">
+                <span class="input-error" v-if="!$v.formData.phone.required">Поле обязательно</span>
+                <span class="input-error" v-if="!$v.formData.phone.testFirstNum">
+                  Номер должен начинаться с 7
+                </span>
+              </div>
+              <span
+                class="input-error"
+                v-if="!$v.formData.phone.minLength || !$v.formData.phone.maxLength"
+              >
+                Номер должен содержать {{ $v.formData.phone.$params.minLength.min }} символов
+              </span>
+              <span class="input-error" v-if="!$v.formData.phone.numeric">
+                Телефон должен состоять из цифр
+              </span>
+            </label>
+          </div>
 
           <label class="label">
             <select class="input-text" v-model="formData.gender">
@@ -204,7 +221,7 @@
 </template>
 
 <script>
-import { required } from 'vuelidate/lib/validators';
+import { required, minLength, maxLength, numeric } from 'vuelidate/lib/validators';
 import Toast from '@/components/Toast.vue';
 
 export default {
@@ -247,7 +264,20 @@ export default {
       surname: { required },
       name: { required },
       dateOfBirth: { required },
-      phone: { required },
+      phone: {
+        required,
+        minLength: minLength(11),
+        maxLength: maxLength(11),
+        numeric,
+        testFirstNum: (val) => {
+          console.log(val[0]);
+          if (+val[0] === 7) {
+            return true;
+          } else {
+            return false;
+          }
+        },
+      },
       clientGroup: { required },
       city: { required },
       documentType: { required },
